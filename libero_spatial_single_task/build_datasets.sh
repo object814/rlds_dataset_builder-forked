@@ -1,9 +1,5 @@
 #!/bin/bash
 
-DATASET_BUILDER_DIR="/path/to/rlds_dataset_builder/libero_spatial"
-
-cd $DATASET_BUILDER_DIR
-
 declare -A TASKS=(
     [0]='pick_up_the_black_bowl_next_to_the_cookie_box_and_place_it_on_the_plate_demo'
     [1]='pick_up_the_black_bowl_in_the_top_drawer_of_the_wooden_cabinet_and_place_it_on_the_plate_demo'
@@ -24,5 +20,5 @@ do
     echo "Building dataset for $TASK_NAME with dataset name $DATASET_NAME"
     export TASK_NAME=$TASK_NAME
     export TASK_IDX=$i
-    TFDS_DATA_DIR="/data2/zhaoyu/LIBERO_rlds/libero_spatial_single/${DATASET_NAME}" tfds build --overwrite
+    TFDS_DATA_DIR="/data2/zhaoyu/LIBERO_spatial_rlds_single/" tfds build --overwrite
 done

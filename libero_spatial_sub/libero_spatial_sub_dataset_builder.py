@@ -132,6 +132,8 @@ class LiberoSpatialSub(tfds.core.GeneratorBasedBuilder):
             episode_length = actions_batch[i].shape[0]
             for j in range(episode_length):
                 language_embedding = self._embed([language_instruction])[0].numpy()
+                print(actions_batch[i][j])
+                input("PAUSE")
                 episode.append({
                     'observation': {
                         'image': images_batch[i][j],

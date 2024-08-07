@@ -1,7 +1,7 @@
 from typing import Iterator, Tuple, Any
 
 import os
-os.environ['TFDS_DATA_DIR'] = '/data2/zhaoyu/LIBERO_rlds/libero_spatial_single'
+os.environ['TFDS_DATA_DIR'] = '/data2/zhaoyu/LIBERO_spatial_rlds_single'
 import sys
 # Add VLA_DIR to PYTHONPATH
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname('__file__'), '../../..')))
@@ -23,11 +23,15 @@ class LiberoSpatial(tfds.core.GeneratorBasedBuilder):
     RELEASE_NOTES = {
         '1.0.0': 'Initial release.',
     }
+    
+    @property
+    def name(self):
+        return f"libero_spatial_{os.environ.get('TASK_IDX')}"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.task_name = os.environ.get('TASK_NAME', 'libero_spatial')
-        self.task_idx = int(os.environ.get('TASK_IDX', 0))
+        self.task_name = os.environ.get('TASK_NAME')
+        self.task_idx = int(os.environ.get('TASK_IDX'))
         self._embed = hub.load("https://tfhub.dev/google/universal-sentence-encoder-large/5")
 
     def _info(self) -> tfds.core.DatasetInfo:
